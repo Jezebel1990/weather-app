@@ -1,0 +1,247 @@
+:root {
+    --primary-bg: linear-gradient(135deg, #667eea 0%, #3710d2 50%, #1160cf 100%);
+    --glass-bg: rgba(255, 255, 255, 0.12);
+    --glass-border: rgba(255, 255, 255, 0.2);
+    --text-color: #ffffff;
+    --accent: #ffd700;
+    --shadow: rgba(0, 0, 0, 0.15);
+}
+
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* 🔥 BODY (CORRIGIDO PROFISSIONAL) */
+body {
+    font-family: 'Segoe UI', Roboto, sans-serif;
+    background: var(--primary-bg);
+    color: var(--text-color);
+
+    display: flex;
+    justify-content: center;
+
+    min-height: 100vh;
+    padding: 12px;
+}
+
+/* 📦 CONTAINER (🔥 CORREÇÃO PRINCIPAL) */
+.container {
+    width: 100%;
+    max-width: 1000px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* 🔥 centraliza conteúdo */
+}
+
+/* HEADER */
+.header {
+    text-align: center;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+/* 🔥 LOGO */
+.logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.emoji {
+    font-size: 2.5rem;
+}
+
+.title {
+    font-size: 2.8rem;
+    font-weight: bold;
+    background: linear-gradient(45deg, #ffd700, #00bfff);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.subtitle {
+    margin-top: 10px;
+    font-size: 1rem;
+    opacity: 0.85;
+}
+
+/* SEARCH */
+.search-box {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.search-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 420px;
+}
+
+.search-input {
+    width: 100%;
+    padding: 14px 50px 14px 18px;
+    border-radius: 30px;
+    border: none;
+    font-size: 1rem;
+    text-align: center;
+}
+
+.search-btn {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+/* 🔥 CENTRALIZA TEXTOS AUXILIARES */
+.hint {
+    text-align: center;
+    margin-top: 10px;
+    width: 100%;
+}
+
+.label {
+    text-align: center;
+    display: block;
+    width: 100%;
+}
+
+/* CARD */
+.weather-card {
+    width: 100%;
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    border-radius: 20px;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+/* CITY */
+.city-name {
+    font-size: 1.6rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* TEMP */
+.temp {
+    font-size: 3rem;
+    text-align: center;
+    margin: 10px 0;
+}
+
+/* DETAILS */
+.details {
+    display: flex;
+    gap: 12px;
+    margin-top: 15px;
+}
+
+/* MOBILE DEFAULT */
+.detail {
+    flex: 1;
+    padding: 12px;
+    border-radius: 12px;
+    background: rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+/* FORECAST */
+.forecast {
+    margin-top: 20px;
+}
+
+.forecast-title {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+/* MOBILE FIRST */
+.forecast-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.forecast-card {
+    width: 100%;
+    padding: 14px;
+    border-radius: 12px;
+    background: rgba(255,255,255,0.12);
+    text-align: center;
+}
+
+/* 📱 TABLET */
+@media (min-width: 600px) {
+
+    .details {
+        justify-content: center;
+    }
+
+    .detail {
+        max-width: 150px;
+    }
+
+    .forecast-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.container.centered {
+    min-height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center;  
+}
+
+/* 💻 DESKTOP */
+@media (min-width: 900px) {
+
+    .forecast-grid {
+        grid-template-columns: repeat(5, 1fr);
+    }
+
+    .title {
+        font-size: 3.2rem;
+    }
+
+    .temp {
+        font-size: 3.5rem;
+    }
+}
+
+/* 📱 MOBILE INPUT AJUSTE */
+@media (max-width: 600px) {
+
+    .search-box {
+        padding: 0 12px;
+    }
+
+    .search-wrapper {
+        max-width: 100%;
+    }
+
+    .search-input {
+        width: 100%;
+        font-size: 0.9rem;
+        padding: 12px 45px 12px 15px;
+    }
+
+    .search-btn {
+        right: 12px;
+        font-size: 1rem;
+    }
+}

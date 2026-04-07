@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Previsão do Tempo</title>
+
+    <!-- 🔥 CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <!-- 🔥 FONT AWESOME (ÍCONE LUPA) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+<div class="container {{ 'centered' if not weather_data_list else '' }}">
+
+    <div class="header">
+       <h1 id="sun">🌤️<span class="title">Clima Já</span></h1>
+        <p class="subtitle">
+            Consulte a temperatura atual e previsão de várias cidades do Brasil. Rápido, fácil e gratuito!
+        </p>
+    </div>
+
+    <!-- 🔍 BUSCA -->
+    <div class="search-box">
+        <form action="/weather" method="post" class="search-wrapper">
+
+            <input 
+                type="text" 
+                name="city" 
+                class="search-input"
+                placeholder="Digite uma ou mais cidades (ex: São Paulo, Santos)" 
+                required
+            >
+
+            <!-- 🔥 BOTÃO COM ÍCONE -->
+            <button type="submit" class="search-btn">
+                <i class="fas fa-search"></i>
+            </button>
+
+        </form>
+    </div>
+
+    <div class="hint">
+        💡 Dica: você pode buscar várias cidades separando por vírgula
+    </div>
+
+    {% if error %}
+        <p class="error">{{ error }}</p>
+    {% endif %}
+
+    <!-- 🌤️ RESULTADOS -->
+    {% if weather_data_list %}
+        {% for weather_data in weather_data_list %}
+            <div class="weather-card">
+
+                <div class="city-name">{{ weather_data.city }}</div>
+
+                <div class="label">⏱️ Atualizado em {{ weather_data.today }}</div>
+                <div class="temp">{{ weather_data.temp }}</div>
+
+                <div class="details">
+                    <div class="detail">
+                        🌬️ <br>
+                        <span class="label">Vento</span><br>
+                        {{ weather_data.wind }}
+                    </div>
+
+                    <div class="detail">
+                        💧 <br>
+                        <span class="label">Umidade</span><br>
+                        {{ weather_data.humidity }}
+                    </div>
+
+                    <div class="detail">
+                        🌧️ <br>
+                        <span class="label">Chuva</span><br>
+                        {{ weather_data.rain }}
+                    </div>
+                </div>
+
+                <!-- 📅 FORECAST -->
+                {% if weather_data.forecast %}
+                    <div class="forecast">
+                        <div class="forecast-title">📅 Próximos 5 dias</div>
+
+                        <div class="forecast-grid">
+                            {% for day in weather_data.forecast %}
+                                <div class="forecast-card">
+                                    <div>{{ day.date }}</div>
+                                    <strong>{{ day.temp_max }}° / {{ day.temp_min }}°</strong>
+                                    <div>🌧️ {{ day.precipitation_sum }} mm</div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endif %}
+
+            </div>
+        {% endfor %}
+    {% endif %}
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,13 @@
+.qodo
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+
+# IDE/editor
+.vscode/
+.idea/
+
+weather_log.txt
