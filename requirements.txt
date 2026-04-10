@@ -1,3 +1,2 @@
 Flask
 requests
-python_requires='>=3.11,<3.14'
