@@ -1,5 +1,4 @@
 :root {
-    --primary-bg: linear-gradient(135deg, #667eea 0%, #3710d2 50%, #1160cf 100%);
     --glass-bg: rgba(255, 255, 255, 0.12);
     --glass-border: rgba(255, 255, 255, 0.2);
     --text-color: #ffffff;
@@ -14,27 +13,59 @@
     box-sizing: border-box;
 }
 
-/* 🔥 BODY (CORRIGIDO PROFISSIONAL) */
+/* BODY */
 body {
     font-family: 'Segoe UI', Roboto, sans-serif;
-    background: var(--primary-bg);
     color: var(--text-color);
-
+    min-height: 100vh;
     display: flex;
     justify-content: center;
-
-    min-height: 100vh;
-    padding: 12px;
+    padding: 16px;
+      position: relative;
+    z-index: 1;
 }
 
-/* 📦 CONTAINER (🔥 CORREÇÃO PRINCIPAL) */
+.bg-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover; /* 🔥 cobre toda tela */
+
+    z-index: -2; /* fica atrás de tudo */
+}
+
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+
+    background: rgba(0, 0, 0, 0.4); /* 🔥 escurece vídeo */
+
+    z-index: -1;
+}
+
+.bg-video {
+    filter: brightness(0.7) blur(2px);
+}
+
+
+/* CONTAINER */
 .container {
     width: 100%;
     max-width: 1000px;
-
     display: flex;
     flex-direction: column;
-    align-items: center; /* 🔥 centraliza conteúdo */
+    align-items: center;
+}
+
+.container.centered {
+    justify-content: center;
+    min-height: calc(100vh - 32px);
 }
 
 /* HEADER */
@@ -42,33 +73,25 @@ body {
     text-align: center;
     margin-bottom: 20px;
     width: 100%;
-}
-
-/* 🔥 LOGO */
-.logo {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-}
-
-.emoji {
-    font-size: 2.5rem;
+    padding: 0 8px;
 }
 
 .title {
-    font-size: 2.8rem;
+    font-size: 2rem;
     font-weight: bold;
     background: linear-gradient(45deg, #ffd700, #00bfff);
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    word-break: break-word;
 }
 
 .subtitle {
     margin-top: 10px;
-    font-size: 1rem;
+    font-size: 0.88rem;
     opacity: 0.85;
+    line-height: 1.5;
+    padding: 0 4px;
 }
 
 /* SEARCH */
@@ -76,6 +99,7 @@ body {
     width: 100%;
     display: flex;
     justify-content: center;
+    padding: 0 4px;
 }
 
 .search-wrapper {
@@ -86,11 +110,12 @@ body {
 
 .search-input {
     width: 100%;
-    padding: 14px 50px 14px 18px;
+    padding: 13px 50px 13px 18px;
     border-radius: 30px;
     border: none;
-    font-size: 1rem;
+    font-size: 0.95rem;
     text-align: center;
+    outline: none;
 }
 
 .search-btn {
@@ -101,19 +126,37 @@ body {
     border: none;
     background: none;
     cursor: pointer;
+    color: #555;
+    font-size: 1rem;
+    padding: 4px;
+    line-height: 1;
 }
 
-/* 🔥 CENTRALIZA TEXTOS AUXILIARES */
+/* HINT */
 .hint {
     text-align: center;
     margin-top: 10px;
     width: 100%;
+    font-size: 0.85rem;
+    opacity: 0.85;
+    padding: 0 8px;
+    line-height: 1.5;
 }
 
+/* LABEL */
 .label {
     text-align: center;
     display: block;
     width: 100%;
+    font-size: 0.85rem;
+}
+
+/* ERROR */
+.error {
+    color: #ffcccc;
+    text-align: center;
+    margin-top: 12px;
+    font-size: 0.9rem;
 }
 
 /* CARD */
@@ -121,98 +164,115 @@ body {
     width: 100%;
     background: var(--glass-bg);
     backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
     border-radius: 20px;
-    padding: 20px;
-    margin-top: 20px;
+    padding: 18px 14px;
+    margin-top: 18px;
 }
 
 /* CITY */
 .city-name {
-    font-size: 1.6rem;
+    font-size: 1.4rem;
     font-weight: bold;
     text-align: center;
+    word-break: break-word;
 }
 
 /* TEMP */
 .temp {
-    font-size: 3rem;
+    font-size: 2.6rem;
     text-align: center;
-    margin: 10px 0;
+    margin: 8px 0;
 }
 
 /* DETAILS */
 .details {
     display: flex;
-    gap: 12px;
-    margin-top: 15px;
+    gap: 10px;
+    margin-top: 14px;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
-/* MOBILE DEFAULT */
 .detail {
     flex: 1;
-    padding: 12px;
+    min-width: 80px;
+    padding: 10px 8px;
     border-radius: 12px;
-    background: rgba(0,0,0,0.1);
+    background: rgba(0, 0, 0, 0.15);
     text-align: center;
+    font-size: 0.85rem;
+    line-height: 1.6;
 }
 
 /* FORECAST */
 .forecast {
-    margin-top: 20px;
+    margin-top: 18px;
 }
 
 .forecast-title {
     text-align: center;
     margin-bottom: 10px;
+    font-size: 0.95rem;
+    font-weight: 600;
 }
 
-/* MOBILE FIRST */
 .forecast-grid {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
     gap: 10px;
 }
 
 .forecast-card {
     width: 100%;
-    padding: 14px;
+    padding: 12px 8px;
     border-radius: 12px;
-    background: rgba(255,255,255,0.12);
+    background: rgba(255, 255, 255, 0.12);
     text-align: center;
+    font-size: 0.85rem;
+    line-height: 1.6;
 }
 
-/* 📱 TABLET */
+/* TABLET >= 600px */
 @media (min-width: 600px) {
 
-    .details {
-        justify-content: center;
+    .title {
+        font-size: 2.6rem;
+    }
+
+    .subtitle {
+        font-size: 0.95rem;
+    }
+
+    .weather-card {
+        padding: 22px 20px;
+    }
+
+    .city-name {
+        font-size: 1.6rem;
+    }
+
+    .temp {
+        font-size: 3rem;
     }
 
     .detail {
+        font-size: 0.9rem;
         max-width: 150px;
     }
 
     .forecast-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .forecast-card {
+        font-size: 0.9rem;
     }
 }
 
-.container.centered {
-    min-height: 100vh;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: center; 
-    align-items: center;  
-}
-
-/* 💻 DESKTOP */
+/* DESKTOP >= 900px */
 @media (min-width: 900px) {
-
-    .forecast-grid {
-        grid-template-columns: repeat(5, 1fr);
-    }
 
     .title {
         font-size: 3.2rem;
@@ -221,27 +281,12 @@ body {
     .temp {
         font-size: 3.5rem;
     }
-}
 
-/* 📱 MOBILE INPUT AJUSTE */
-@media (max-width: 600px) {
-
-    .search-box {
-        padding: 0 12px;
+    .forecast-grid {
+        grid-template-columns: repeat(5, 1fr);
     }
 
-    .search-wrapper {
-        max-width: 100%;
-    }
-
-    .search-input {
-        width: 100%;
-        font-size: 0.9rem;
-        padding: 12px 45px 12px 15px;
-    }
-
-    .search-btn {
-        right: 12px;
-        font-size: 1rem;
+    .detail {
+        font-size: 0.95rem;
     }
 }

@@ -1,7 +1,8 @@
 from flask import Flask, render_template, request
 from geocoding import get_coordinates
 from weather import get_cached_weather_data, get_5_day_forecast
-import datetime  # 🔥 NOVO
+import datetime
+import os
 
 app = Flask(
     __name__,
@@ -73,4 +74,5 @@ def weather():
 
 
 if __name__ == "__main__":
-    app.run()
+    port = int(os.environ.get("PORT", 10000))
+    app.run(host="0.0.0.0", port=port)
